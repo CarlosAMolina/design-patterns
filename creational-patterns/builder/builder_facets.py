@@ -68,7 +68,7 @@ class PersonAddressBuilder(PersonBuilder):
 
 if __name__ == "__main__":
     pb = PersonBuilder()
-    p = (
+    person_1 = (
         pb.lives.at("C. Rue del Percebe, 13")
         .in_city("Madrid")
         .with_postcode("28521")
@@ -78,7 +78,16 @@ if __name__ == "__main__":
         .build()
     )
     print("Person 1")
-    print(p)
-    person2 = PersonBuilder().build()
+    print(person_1)
+    # Use person_1 data in a new person
     print("Person 2")
-    print(person2)
+    pb = PersonBuilder(person_1)
+    person_2 = (
+        pb.works.at("Radio")
+        .as_a("Onda collector")
+        .build()
+    )
+    print(person_2)
+    person_empty = PersonBuilder().build()
+    print("Person empty")
+    print(person_empty)
