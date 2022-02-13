@@ -66,6 +66,9 @@ class Point:
     def __str__(self):
         return f'x: {self.x}, y: {self.y}'
 
+    # The PointFactory can be a inner class of Point an use:
+    # factory = PointFactory()
+
 
 class PointFactory:
     @staticmethod
