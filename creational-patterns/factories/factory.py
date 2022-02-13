@@ -32,6 +32,8 @@ class PointBad:
         return f'x: {self.x}, y: {self.y}'
 
 
+# Factory method
+
 class PointWithFactoryMethod:
 
     def __init__(self, x, y):
@@ -49,9 +51,40 @@ class PointWithFactoryMethod:
     def new_polar_point(rho, theta):
         return PointWithFactoryMethod(rho * math.sin(theta), rho * math.cos(theta))
 
+# Factory
+
+class Point:
+
+    def __init__(self, x=0, y=0):
+        """
+        We can set default values to the arguments and the 
+        factory won't need to know how to use de init method.
+        """
+        self.x = x
+        self.y = y
+
+    def __str__(self):
+        return f'x: {self.x}, y: {self.y}'
+
+
+class PointFactory:
+    @staticmethod
+    def new_cartesian_point(x, y):
+        # Init a Point without worry about how to use the init method.
+        p = Point()
+        p.x = x
+        p.y = y
+        return p
+
+    @staticmethod
+    def new_polar_point(rho, theta):
+        return Point(rho * math.sin(theta), rho * math.cos(theta))
+
 
 if __name__ == '__main__':
     p1 = PointBad(2, 3, CoordinateSystem.CARTESIAN)
     p2 = PointWithFactoryMethod.new_cartesian_point(1, 2)
     p3 = PointWithFactoryMethod.new_polar_point(5, 6)
-    print(p1, p2, p3)
+    p4 = PointFactory.new_cartesian_point(7, 8)
+    p5 = PointFactory.new_polar_point(9, 10)
+    print(p1, p2, p3, p4, p5)
