@@ -1,5 +1,6 @@
 # External library
 
+
 class Point:
     def __init__(self, x, y):
         self.y = y
@@ -11,6 +12,7 @@ def draw_point(p):
 
 
 # Our library
+
 
 class Line:
     def __init__(self, start: Point, end: Point):
@@ -37,7 +39,6 @@ class LineToPointAdapter(list):
             f"[{line.start.x},{line.start.y}]→"
             f"[{line.end.x},{line.end.y}]"
         )
-
 
         left = min(line.start.x, line.end.x)
         right = max(line.start.x, line.end.x)
@@ -71,7 +72,6 @@ class LineToPointAdapterCache:
             f"[{line.start.x},{line.start.y}]→"
             f"[{line.end.x},{line.end.y}]"
         )
-
 
         left = min(line.start.x, line.end.x)
         right = max(line.start.x, line.end.x)
@@ -107,6 +107,7 @@ def draw(rectangles):
             for point in adapter:
                 draw_point(point)
 
+
 def draw_cache(rectangles):
     for index, rectangle in enumerate(rectangles, 1):
         print(f"\nRectangle {index}")
@@ -114,8 +115,6 @@ def draw_cache(rectangles):
             adapter = LineToPointAdapterCache(line)
             for point in adapter:
                 draw_point(point)
-
-
 
 
 if __name__ == "__main__":
@@ -132,7 +131,3 @@ if __name__ == "__main__":
     print("\n## Execution caching. 2")
     # All lines were generated previously, now the cache is used.
     draw_cache(rectangles)
-
-
-
-
