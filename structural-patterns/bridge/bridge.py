@@ -13,7 +13,7 @@ class Renderer(ABC):
     def render_circle(self, radius):
         pass
 
-    def render_square(self, *args)
+    def render_square(self, *args):
         pass
 
 
