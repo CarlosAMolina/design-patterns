@@ -24,6 +24,7 @@ class Neuron(Connectable):
     #     self.outputs.append(other)
     #     other.inputs.append(self)
 
+    # Convert a single object in an iterable.
     def __iter__(self):
         yield self
 
