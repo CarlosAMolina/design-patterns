@@ -36,7 +36,7 @@ class Console:
     def write(self, text):
         self.current_viewport.buffer.write(text)
 
-    # low-level
+    # We can optionally expose low-level facilities
     def get_char_at(self, index):
         return self.current_viewport.get_char_at(index)
 
