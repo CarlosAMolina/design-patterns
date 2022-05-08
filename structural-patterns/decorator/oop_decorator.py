@@ -49,7 +49,7 @@ if __name__ == "__main__":
     circle = Circle(2)
     print(circle)
 
-    red_circle = ColoredShape(circle, "red") # Decorate the circle instance.
+    red_circle = ColoredShape(circle, "red")  # Decorate the circle instance.
     print(red_circle)
 
     # ColoredShape doesn't have resize()
