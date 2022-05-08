@@ -4,6 +4,7 @@ class FileWithLogging:
 
     def writelines(self, strings):
         self.file.writelines(strings)
+        # Log number of lines written.
         print(f"wrote {len(strings)} lines")
 
     def __iter__(self):
@@ -27,6 +28,6 @@ class FileWithLogging:
 
 if __name__ == "__main__":
     file = FileWithLogging(open("hello.txt", "w"))
-    file.writelines(["hello", "world"])
-    file.write("testing")
+    file.writelines(["hello", "world"]) # Write with logs.
+    file.write("testing") # Write without logs.
     file.close()
