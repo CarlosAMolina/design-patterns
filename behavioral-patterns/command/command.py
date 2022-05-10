@@ -37,10 +37,10 @@ class BankAccountCommand(Command):
         self.amount = amount
         self.action = action
         self.account = account
-        self.success = None # Required to avoid invalid operations 
-                            # that will cause incorrect results.
-                            # Like withdraw an amunt of money 
-                            # that will incrase the balance.
+        self.success = None  # Required to avoid invalid operations
+        # that will cause incorrect results.
+        # Like withdraw an amunt of money
+        # that will incrase the balance.
 
     class Action(Enum):
         DEPOSIT = 0
@@ -67,19 +67,19 @@ class BankAccountCommand(Command):
 
 
 if __name__ == "__main__":
-    ba = BankAccount() # Balance = 0
+    ba = BankAccount()  # Balance = 0
     cmd = BankAccountCommand(ba, BankAccountCommand.Action.DEPOSIT, 100)
     cmd.invoke()
-    print("After $100 deposit:", ba) # Balance = 100
+    print("After $100 deposit:", ba)  # Balance = 100
 
     cmd.undo()
-    print("$100 deposit undone:", ba) # Balance = 0
+    print("$100 deposit undone:", ba)  # Balance = 0
 
     # Example of invalid operation.
-    # Without the `BankAccountCommand.sucess` attribute this would create 
+    # Without the `BankAccountCommand.sucess` attribute this would create
     # a positive balance.
     illegal_cmd = BankAccountCommand(ba, BankAccountCommand.Action.WITHDRAW, 1000)
     illegal_cmd.invoke()
-    print("After impossible withdrawal:", ba) # Balance = 0
+    print("After impossible withdrawal:", ba)  # Balance = 0
     illegal_cmd.undo()
-    print("After undo:", ba) # Balance = 0
+    print("After undo:", ba)  # Balance = 0
