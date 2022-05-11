@@ -74,7 +74,7 @@ class BinaryOperation:
 
 def parse(tokens):
     result = BinaryOperation()
-    have_lhs = False
+    have_lhs = False  # Left part has been parsed or not.
     i = 0
     while i < len(tokens):
         token = tokens[i]
@@ -114,13 +114,13 @@ def eval(input):
     # Print each token to check they are correct.
     print(" ".join(map(str, tokens)))
 
-    # parsed = parse(tokens)
-    # print(f"{input} = {parsed.value}")
+    parsed = parse(tokens)
+    print(f"{input} = {parsed.value}")
 
 
 if __name__ == "__main__":
     eval("(13+4)-(12+1)")
-    # eval("1+(3-4)")
+    eval("1+(3-4)")
 
-    ## this won't work
-    # eval("1+2+(3-4)")
+    # this won't work
+    eval("1+2+(3-4)")
