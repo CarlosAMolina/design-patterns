@@ -53,6 +53,7 @@ class InOrderIterator:
 
 
 # Implement the iterator in a better way.
+# With `yield` the code is more understandable.
 def traverse_in_order(root):
     def traverse(current):
         if current.left:
