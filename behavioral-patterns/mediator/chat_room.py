@@ -22,7 +22,7 @@ class ChatRoom:
 
     def broadcast(self, source, message):
         for p in self.people:
-            if p.name != source: # The sender does not receive the msg.
+            if p.name != source:  # The sender does not receive the msg.
                 p.receive(source, message)
 
     def join(self, person):
