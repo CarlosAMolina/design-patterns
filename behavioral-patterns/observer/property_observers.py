@@ -22,7 +22,7 @@ class Person(PropertyObservable):
 
     @age.setter
     def age(self, value):
-        if self._age == value: # No change occurs.
+        if self._age == value:  # No change occurs.
             return
         self._age = value
         self.property_changed("age", value)
@@ -30,6 +30,7 @@ class Person(PropertyObservable):
 
 class TrafficAuthority:
     """Monitors if a person has the required age to drive a car."""
+
     def __init__(self, person):
         self.person = person
         person.property_changed.append(self.person_changed)
