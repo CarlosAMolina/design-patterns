@@ -119,9 +119,9 @@ class TestSuite(unittest.TestCase):
         deposit2 = BankAccountCommand(ba, BankAccountCommand.Action.DEPOSIT, 50)
         composite = CompositeBankAccountCommand([deposit1, deposit2])
         composite.invoke()
-        print(ba)
+        print(ba) # Balance = 150
         composite.undo()
-        print(ba)
+        print(ba) # Balance = 0
 
     def test_transfer_fail(self):
         """Here we don't check if it isn't enough money to 
@@ -139,9 +139,10 @@ class TestSuite(unittest.TestCase):
         transfer = CompositeBankAccountCommand([wc, dc])
 
         transfer.invoke()
-        print("ba1:", ba1, "ba2:", ba2)  # end up in incorrect state
+        print("ba1:", ba1, "ba2:", ba2)  # ba1: Balance = 100 ba2: Balance = 1000 # end up in incorrect state
         transfer.undo()
-        print("ba1:", ba1, "ba2:", ba2)
+        print("ba1:", ba1, "ba2:", ba2) # ba1: Balance = 100 ba2: Balance = 0
+
 
     def test_better_tranfer(self):
         print("TEST 3")
@@ -152,10 +153,11 @@ class TestSuite(unittest.TestCase):
 
         transfer = MoneyTransferCommand(ba1, ba2, amount)
         transfer.invoke()
-        print("ba1:", ba1, "ba2:", ba2)
+        print("ba1:", ba1, "ba2:", ba2) # ba1: Balance = 100 ba2: Balance = 0
         transfer.undo()
-        print("ba1:", ba1, "ba2:", ba2)
-        print("Success:", transfer.success)
+        print("ba1:", ba1, "ba2:", ba2) # ba1: Balance = 100 ba2: Balance = 0
+        print("Success:", transfer.success) # Success: False
+
 
 if __name__ == "__main__":
     unittest.main()
