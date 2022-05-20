@@ -3,8 +3,9 @@ from abc import ABC
 
 
 class Switch:
-    """We don't modify it's state directly, 
+    """We don't modify its state directly,
     we do it using an State object."""
+
     def __init__(self):
         self.state = OffState()
 
@@ -42,7 +43,7 @@ class OffState(State):
 
 
 if __name__ == "__main__":
-    sw = Switch() # Light turned off
+    sw = Switch()  # Light turned off
 
     sw.on()  # Turning light on...
     # Light turned on
