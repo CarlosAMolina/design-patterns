@@ -1,3 +1,5 @@
+# In this example, `buffer` visits both classes.
+
 class DoubleExpression:
     def __init__(self, value):
         self.value = value
