@@ -61,19 +61,12 @@ class ExpressionPrinter:
     def __init__(self):
         self.buffer = []
 
-    # This methods is called when we are
-    # at the DoubleExpression class.
     @visitor(DoubleExpression)
     def visit(self, de):
         self.buffer.append(str(de.value))
 
-    # This methods is called when we are
-    # at the AdditionExpression class.
     @visitor(AdditionExpression)
     def visit(self, ae):
-        """
-        ae = aditional expression
-        """
         self.buffer.append("(")
         ae.left.accept(self)
         self.buffer.append("+")
@@ -84,13 +77,34 @@ class ExpressionPrinter:
         return "".join(self.buffer)
 
 
+class ExpressionEvaluator:
+    def __init__(self):
+        self.value = None
+
+    @visitor(DoubleExpression)
+    def visit(self, de):
+        self.value = de.value
+
+    @visitor(AdditionExpression)
+    def visit(self, ae):
+        # ae.left.accept(self)
+        self.visit(ae.left)
+        temp = self.value
+        # ae.right.accept(self)
+        self.visit(ae.right)
+        self.value += temp
+
+
 if __name__ == "__main__":
     # represents 1+(2+3)
     e = AdditionExpression(
         DoubleExpression(1),
         AdditionExpression(DoubleExpression(2), DoubleExpression(3)),
     )
-    buffer = []
     printer = ExpressionPrinter()
     printer.visit(e)
-    print(printer)
+
+    evaluator = ExpressionEvaluator()
+    evaluator.visit(e)
+
+    print(f"{printer} = {evaluator.value}")
