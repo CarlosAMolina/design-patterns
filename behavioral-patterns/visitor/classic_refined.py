@@ -68,9 +68,14 @@ class ExpressionPrinter:
     @visitor(AdditionExpression)
     def visit(self, ae):
         self.buffer.append("(")
-        ae.left.accept(self)
+        # Difference with the `classic.py` example,
+        # due to the python's duck typing,
+        # this call is not requied.
+        # ae.left.accept(self)
+        self.visit(ae.left)
         self.buffer.append("+")
-        ae.right.accept(self)
+        # ae.right.accept(self)
+        self.visit(ae.left)
         self.buffer.append(")")
 
     def __str__(self):
@@ -87,11 +92,14 @@ class ExpressionEvaluator:
 
     @visitor(AdditionExpression)
     def visit(self, ae):
-        # ae.left.accept(self)
         self.visit(ae.left)
+        # When the right part is evaluated, the left one
+        # is overwritten, we need to store it.
+        # With statefull visitor, we need to
+        # store some values.
         temp = self.value
-        # ae.right.accept(self)
         self.visit(ae.right)
+        # We implement the plus operation.
         self.value += temp
 
 
